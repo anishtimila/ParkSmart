@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/TechPark.iml" filepath="$PROJECT_DIR$/TechPark.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SmartPark.iml" filepath="$PROJECT_DIR$/SmartPark.iml" />
+      <module fileurl="file://C:\Users\anish\Desktop\SmartPark\TechPark.iml" filepath="C:\Users\anish\Desktop\SmartPark\TechPark.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
