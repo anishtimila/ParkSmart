@@ -18,7 +18,9 @@
         </activity>
         <activity android:name=".find_parking" />
         <activity android:name=".safe_ride" />
-        <activity android:name=".nite_shuttle"></activity>
+        <activity android:name=".nite_shuttle" />
+        <activity android:name=".student" />
+        <activity android:name=".commNorth"></activity>
     </application>
 
 </manifest>
