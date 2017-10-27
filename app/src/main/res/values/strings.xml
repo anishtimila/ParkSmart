@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TechPark</string>
+    <string name="button_safe">Safe Ride Info</string>
+    <string name="button_nite">Nite Shuttle info</string>
+    <string name="button_find">Find Parking</string>
+
+</resources>
