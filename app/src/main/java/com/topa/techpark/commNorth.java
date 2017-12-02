@@ -3,9 +3,9 @@ package com.topa.techpark;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,18 +16,19 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class commNorth extends AppCompatActivity {
-
-    ListView listView;
+    private ListView lv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comm_north);
 
-        listView = (ListView) findViewById(R.id.listView);
+        lv = (ListView)findViewById(R.id.listView);
         getJSON("http://192.168.0.17/index.php");
     }
 
@@ -76,16 +77,18 @@ public class commNorth extends AppCompatActivity {
 
     private void loadIntoListView(String json) throws JSONException {
         JSONArray jsonArray = new JSONArray(json);
-        ///ArrayList<String[]> parkDataSub = new ArrayList<>();
-        String[] parkDataSub = new String[jsonArray.length()];
+        List<String> mylist = new ArrayList<>();
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject obj = jsonArray.getJSONObject(i);
-            parkDataSub[i] = obj.getString("rowNo");
-            parkDataSub[i] = obj.getString("lotName");
-            parkDataSub[i] = obj.getString("FreeSpace");
-            //parkData.add(parkDataSub);
+            String row = obj.getString("rowNo");
+            String lot = obj.getString("lotName");
+            String space = obj.getString("FreeSpace");
+            String item = "      "+ row +"              "+ lot +"               "+ space;
+            mylist.add(item);
         }
-        ArrayAdapter<String[]> arrayAdapter = new ArrayAdapter<String[]>(this, android.R.layout.simple_list_item_1, parkDataSub);
-        listView.setAdapter(arrayAdapter);
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mylist);
+        lv.setAdapter(arrayAdapter);
+
     }
 }
