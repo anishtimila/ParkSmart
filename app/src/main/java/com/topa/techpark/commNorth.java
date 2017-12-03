@@ -1,6 +1,7 @@
 package com.topa.techpark;
 
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,18 +20,33 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class commNorth extends AppCompatActivity {
     private ListView lv;
+    Handler mHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comm_north);
-
-        lv = (ListView)findViewById(R.id.listView);
-        getJSON("http://192.168.0.17/index.php");
+        this.mHandler = new Handler();
+        m_Runnable.run();
     }
+
+    private final Runnable m_Runnable = new Runnable()
+    {
+        public void run()
+
+        {
+            lv = (ListView)findViewById(R.id.listView);
+            getJSON("http://192.168.0.17/index.php");
+
+            commNorth.this.mHandler.postDelayed(m_Runnable,2000);
+        }
+
+    };
 
 
     private void getJSON(final String urlWebService) {
@@ -52,6 +68,7 @@ public class commNorth extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
             }
 
             @Override
@@ -75,6 +92,7 @@ public class commNorth extends AppCompatActivity {
         getJSON.execute();
     }
 
+
     private void loadIntoListView(String json) throws JSONException {
         JSONArray jsonArray = new JSONArray(json);
         List<String> mylist = new ArrayList<>();
@@ -87,8 +105,7 @@ public class commNorth extends AppCompatActivity {
             mylist.add(item);
         }
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mylist);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mylist);
         lv.setAdapter(arrayAdapter);
-
     }
 }
